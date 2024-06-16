@@ -62,5 +62,4 @@ public class ArrowController : MonoBehaviour
     {
         return _initialAimPosition;
     }
-    
 }

@@ -21,15 +21,28 @@ public class BallController : MonoBehaviour
 
     void Update()
     {
+        MoveBall();
+    }
+
+    private void MoveBall()
+    {
         // Логика запуска мяча по траектории от текущей позиции прицела
         if (Input.GetMouseButtonDown(0) && !_isMoving)
         {
             Vector3 currentAimPosition = _arrowController.GetInitialAimPosition(); // Получаем текущую позицию прицела
-            _direction = ((Vector2)currentAimPosition - _rigidbody.position).normalized;
+            _direction = ((Vector2) currentAimPosition - _rigidbody.position).normalized;
             _isMoving = true;
             _rigidbody.isKinematic = false; // Выключаем кинематику, чтобы Rigidbody2D реагировал на физику
             _rigidbody.velocity = _direction * _ballSpeed; // Устанавливаем скорость мяча
         }
+    }
+
+    private void ResetBall()
+    {
+        _isMoving = false;
+        _ballSpeed = 10f; // Возвращаем скорость мяча к исходному значению
+        _rigidbody.velocity = Vector2.zero; // Обнуляем скорость мяча
+        _rigidbody.isKinematic = true;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -41,6 +54,7 @@ public class BallController : MonoBehaviour
             _rigidbody.velocity = Vector2.zero; // Обнуляем скорость мяча
             _rigidbody.isKinematic = true; // Включаем кинематику, чтобы мяч перестал реагировать на физику
             Debug.Log("Ball collided with barrier.");
+            ResetBall();
         }
     }
 }
