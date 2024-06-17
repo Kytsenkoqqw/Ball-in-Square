@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class BallController : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class BallController : MonoBehaviour
     [SerializeField] private float _moveSpeed = 15f;
     [SerializeField] private GameObject _aimArrow;
     [SerializeField] private GameObject _losePanel;
+    [SerializeField] private ScoreManager _scoreManager;
     
     private Vector3 _moveDirection;
     private Vector3 _currentPosition;
@@ -66,6 +68,7 @@ public class BallController : MonoBehaviour
         else if (collision.gameObject.GetComponent<CircleCollider2D>())
         {
             Destroy(gameObject);
+            _scoreManager.GameOver();
             _losePanel.SetActive(true);
             Time.timeScale = 0;
         }
