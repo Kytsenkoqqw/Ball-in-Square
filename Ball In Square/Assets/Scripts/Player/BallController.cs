@@ -62,6 +62,10 @@ public class BallController : MonoBehaviour
             _currentPosition = collision.collider.transform.position;
             _arrowRotationScript.OnBallCollision(collisionPoint, angle);
         }
+        else if (collision.gameObject.GetComponent<EnemyMove>())
+        {
+            Destroy(gameObject);
+        }
     }
     
     private float GetAngle(Vector2 from, Vector2 to)
