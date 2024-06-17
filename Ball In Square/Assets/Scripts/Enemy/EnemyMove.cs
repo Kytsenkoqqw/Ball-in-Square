@@ -1,68 +1,73 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyMove : MonoBehaviour
 {
-    public float moveSpeed = 3f; // Скорость движения врага
+    [SerializeField]private GameObject _prefab;
 
-    private Vector2[] movementDirections = { Vector2.right, Vector2.down, Vector2.left, Vector2.up }; // Направления движения по граням квадрата
-    private int currentDirectionIndex = 0; // Индекс текущего направления движения
+    private float _speed = 2f;
+    [SerializeField] private float _squareSize = 7f;
 
-    private Rigidbody2D rb;
-
-    private void Start()
+    private Vector3[] _corners;
+    private List<int> _currentTargetIndices = new List<int>();
+    private List<GameObject> _movingObjects = new List<GameObject>();
+    private bool _start = false;
+    void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        rb.gravityScale = 0f; // Отключаем гравитацию для врага-мяча
-        MoveInCurrentDirection();
+        _corners = new Vector3[4];
+        _corners[0] = new Vector3(-_squareSize / 2, -_squareSize / 2, 0);
+        _corners[1] = new Vector3(_squareSize / 2, -_squareSize / 2, 0);
+        _corners[2] = new Vector3(_squareSize / 2, _squareSize / 2, 0);
+        _corners[3] = new Vector3(-_squareSize / 2, _squareSize / 2, 0);
+
+       
+        GameObject object1 = Instantiate(_prefab, _corners[0], Quaternion.identity);
+        GameObject object2 = Instantiate(_prefab, _corners[2], Quaternion.identity);
+        
+
+    
+        _movingObjects.Add(object1);
+        _movingObjects.Add(object2);
+        _currentTargetIndices.Add(1); 
+        _currentTargetIndices.Add(3);
     }
 
-    private void Update()
+
+    void Update()
     {
-        // Проверяем, достиг ли враг конца текущего отрезка (грани квадрата)
-        if (HasReachedEndOfCurrentDirection())
+        if(Input.GetMouseButton(0))
         {
-            // Если достиг, переключаемся на следующее направление движения
-            currentDirectionIndex = (currentDirectionIndex + 1) % movementDirections.Length;
-            MoveInCurrentDirection();
-        }
-    }
-
-    private void MoveInCurrentDirection()
-    {
-        // Начать движение в текущем направлении
-        Vector2 direction = movementDirections[currentDirectionIndex];
-        rb.velocity = direction * moveSpeed;
-    }
-
-    private bool HasReachedEndOfCurrentDirection()
-    {
-        // Проверяем, достиг ли враг конца текущего отрезка (грани квадрата)
-        Vector2 direction = movementDirections[currentDirectionIndex];
-        Vector2 currentPosition = rb.position;
-        Vector2 nextPosition = currentPosition + direction * moveSpeed * Time.deltaTime;
-
-        // Если следующая позиция уже за гранью квадрата, вернуть true
-        if (!IsPositionWithinSquare(nextPosition))
-        {
-            return true;
+            _start = true;
         }
 
-        return false;
+        if (_start == true)
+        {
+            MoveEnemy();
+        }
+        
     }
 
-    private bool IsPositionWithinSquare(Vector2 position)
+    private void MoveEnemy()
     {
-        // Проверяем, находится ли позиция внутри квадрата (по X и Y от -4 до 4, например)
-        float squareSize = 8f; // Размер квадрата, в который ограничены движения
-        float boundary = squareSize / 2f;
-
-        if (Mathf.Abs(position.x) > boundary || Mathf.Abs(position.y) > boundary)
+        for (int i = 0; i < _movingObjects.Count; i++)
         {
-            return false;
-        }
+            GameObject movingObject = _movingObjects[i];
+            int currentTargetIndex = _currentTargetIndices[i];
+            Vector3 targetPosition = _corners[currentTargetIndex];
 
-        return true;
+            movingObject.transform.position = Vector3.MoveTowards(movingObject.transform.position, targetPosition, _speed * Time.deltaTime);
+
+            
+            if (Vector3.Distance(movingObject.transform.position, targetPosition) < 0.01f)
+            {
+               
+                movingObject.transform.position = targetPosition;
+
+                
+                _currentTargetIndices[i] = (currentTargetIndex + 1) % 4;
+            }
+        }
     }
 }
