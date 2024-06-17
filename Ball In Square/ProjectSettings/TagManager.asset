@@ -5,11 +5,15 @@ TagManager:
   serializedVersion: 2
   tags:
   - Barrier
+  - TopWall
+  - LeftWall
+  - RightWall
+  - BottomWall
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Barrier
   - Water
   - UI
   - 

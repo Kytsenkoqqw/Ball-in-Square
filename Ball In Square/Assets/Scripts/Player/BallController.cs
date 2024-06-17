@@ -5,57 +5,68 @@ using UnityEngine;
 
 public class BallController : MonoBehaviour
 {
-    [SerializeField] private float _ballSpeed = 5f;
-    private Vector2 _direction; // Направление движения мяча
-    private bool _isMoving = false; // Флаг для определения, двигается ли мяч
-    [SerializeField] private ArrowController _arrowController; // Ссылка на компонент прицела
-    private Rigidbody2D _rigidbody;
-
-    void Start()
+    [SerializeField] private Transform _arrowTransform;
+    [SerializeField] private float _moveSpeed = 15f;
+    [SerializeField] private GameObject _aimArrow;
+    
+    private Vector3 _moveDirection;
+    private Vector3 _currentPosition;
+    
+    private bool _isMove = false;
+    
+    private Rigidbody2D _rb;
+    
+    private ArrowController _arrowRotationScript;
+    
+    private void Start()
     {
-        _arrowController = FindObjectOfType<ArrowController>(); // Получаем ссылку на компонент прицела
-        _rigidbody = GetComponent<Rigidbody2D>();
-        _rigidbody.isKinematic = true; // Включаем кинематику, чтобы мы могли управлять движением вручную
-        _rigidbody.gravityScale = 0; // Отключаем гравитацию для кинематического объекта
+        _rb = GetComponent<Rigidbody2D>();
+        _arrowRotationScript = _arrowTransform.GetComponent<ArrowController>();
+        _currentPosition = transform.position;
     }
 
-    void Update()
+    private void Update()
     {
+        if (Input.GetMouseButtonDown(0) && _rb.velocity == Vector2.zero)
+        {
+            _aimArrow.SetActive(false);
+            _isMove = true;
+            _moveDirection = (_arrowTransform.position - transform.position).normalized;
+        }
         MoveBall();
     }
-
+    
     private void MoveBall()
     {
-        // Логика запуска мяча по траектории от текущей позиции прицела
-        if (Input.GetMouseButtonDown(0) && !_isMoving)
+        if(_isMove == true)
         {
-            Vector3 currentAimPosition = _arrowController.GetInitialAimPosition(); // Получаем текущую позицию прицела
-            _direction = ((Vector2) currentAimPosition - _rigidbody.position).normalized;
-            _isMoving = true;
-            _rigidbody.isKinematic = false; // Выключаем кинематику, чтобы Rigidbody2D реагировал на физику
-            _rigidbody.velocity = _direction * _ballSpeed; // Устанавливаем скорость мяча
+            _rb.velocity = _moveDirection * _moveSpeed;
+        }
+        else
+        {
+            _isMove = false;
+        }
+
+    }
+    
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if( collision.gameObject.layer == LayerMask.NameToLayer("Barrier"))
+        {
+            _aimArrow.SetActive(true);
+            _rb.velocity = Vector2.zero;
+            _isMove = false;
+            
+            Vector2 collisionPoint = collision.GetContact(0).point;
+            var angle = GetAngle(_currentPosition, collision.collider.transform.position);
+            _currentPosition = collision.collider.transform.position;
+            _arrowRotationScript.OnBallCollision(collisionPoint, angle);
         }
     }
-
-    private void ResetBall()
+    
+    private float GetAngle(Vector2 from, Vector2 to)
     {
-        _isMoving = false;
-        _ballSpeed = 10f; // Возвращаем скорость мяча к исходному значению
-        _rigidbody.velocity = Vector2.zero; // Обнуляем скорость мяча
-        _rigidbody.isKinematic = true;
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Barrier"))
-        {
-            _isMoving = false;
-            _ballSpeed = 0f;
-            _rigidbody.velocity = Vector2.zero; // Обнуляем скорость мяча
-            _rigidbody.isKinematic = true; // Включаем кинематику, чтобы мяч перестал реагировать на физику
-            Debug.Log("Ball collided with barrier.");
-            ResetBall();
-        }
+        return Vector2.SignedAngle(from, to);
     }
 }
 
