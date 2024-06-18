@@ -111,6 +111,7 @@
           </e>
           <e p="Player" t="Include">
             <e p="BallController.cs" t="Include" />
+            <e p="BallMark.cs" t="Include" />
           </e>
           <e p="SceneManager" t="Include">
             <e p="MenuManager.cs" t="Include" />
