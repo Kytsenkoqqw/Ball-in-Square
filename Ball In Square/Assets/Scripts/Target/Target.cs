@@ -7,9 +7,11 @@ public class Target : MonoBehaviour
     [SerializeField] private float rotationSpeed = 100f; // Скорость вращения цели
     [SerializeField] private ScoreManager scoreManager;
     private float squareSize = 8f; // Размер квадрата, в котором будет появляться цель
+    private AudioSource _audioSource;
 
     private void Start()
     {
+        _audioSource = GetComponent<AudioSource>();
         Respawn();
     }
 
@@ -33,6 +35,7 @@ public class Target : MonoBehaviour
         // Если мячик попал в цель, перемещаем её в новую случайную точку
         if (other.CompareTag("Player"))
         {
+            _audioSource.Play();
             scoreManager.AddScore(1);
             Respawn();
         }

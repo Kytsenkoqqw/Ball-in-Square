@@ -6,11 +6,13 @@ using UnityEngine.SocialPlatforms.Impl;
 
 public class BallController : MonoBehaviour
 {
+    public static Action OnPlayerDied;
+    
     [SerializeField] private Transform _arrowTransform;
     [SerializeField] private float _moveSpeed = 15f;
     [SerializeField] private GameObject _aimArrow;
-    [SerializeField] private GameObject _losePanel;
     [SerializeField] private ScoreManager _scoreManager;
+    private AudioSource _audioSource;
     
     private Vector3 _moveDirection;
     private Vector3 _currentPosition;
@@ -23,6 +25,7 @@ public class BallController : MonoBehaviour
     
     private void Start()
     {
+        _audioSource = GetComponent<AudioSource>();
         _rb = GetComponent<Rigidbody2D>();
         _arrowRotationScript = _arrowTransform.GetComponent<ArrowController>();
         _currentPosition = transform.position;
@@ -32,13 +35,16 @@ public class BallController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) && _rb.velocity == Vector2.zero)
         {
+            _audioSource.Play();
             _aimArrow.SetActive(false);
             _isMove = true;
             _moveDirection = (_arrowTransform.position - transform.position).normalized;
         }
         MoveBall();
     }
+
     
+
     private void MoveBall()
     {
         if(_isMove == true)
@@ -67,9 +73,9 @@ public class BallController : MonoBehaviour
         }
         else if (collision.gameObject.GetComponent<CircleCollider2D>())
         {
+            OnPlayerDied?.Invoke();
             Destroy(gameObject);
             _scoreManager.GameOver();
-            _losePanel.SetActive(true);
             Time.timeScale = 0;
         }
     }

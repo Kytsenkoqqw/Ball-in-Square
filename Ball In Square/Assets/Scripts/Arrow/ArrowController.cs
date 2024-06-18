@@ -7,7 +7,6 @@ using UnityEngine;
 public class ArrowController : MonoBehaviour
 {
     [SerializeField] private Transform _targetObject;
-        
     [SerializeField] private float _maxDistance = 0.3f;
     [SerializeField] private float _rotationSpeed = 80f; 
     
