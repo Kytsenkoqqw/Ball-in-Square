@@ -9,7 +9,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyMove.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Barrier/Barrier.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Background/ChangeBackgroundColor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Score/ScoreManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Target/Target.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Animations/LosePanelAnimation/LosePanelAnimation.cs" root0="FORCE_HIGHLIGHTING" />
@@ -23,13 +23,14 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/SceneManager/SceneManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/SceneManager/MenuManager.cs" />
         <option value="$PROJECT_DIR$/Assets/LeanTween/Testing/TestingSceneSwitching.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Target/Target.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Arrow/ArrowController.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Score/ScoreManager.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/GameManager/GameManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Player/BallController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyMove.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Animations/LosePanelAnimation/LosePanelAnimation.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Arrow/ArrowController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Target/Target.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/GameManager/GameManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Background/ChangeBackgroundColor.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Score/ScoreManager.cs" />
       </list>
     </option>
   </component>
@@ -75,7 +76,8 @@
       <workItem from="1718472468656" duration="3976000" />
       <workItem from="1718541482624" duration="8083000" />
       <workItem from="1718623884833" duration="16386000" />
-      <workItem from="1718715198287" duration="7375000" />
+      <workItem from="1718715198287" duration="7973000" />
+      <workItem from="1718734468838" duration="1404000" />
     </task>
     <servers />
   </component>

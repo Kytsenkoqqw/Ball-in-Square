@@ -100,8 +100,8 @@
           <e p="Arrow" t="Include">
             <e p="ArrowController.cs" t="Include" />
           </e>
-          <e p="Barrier" t="Include">
-            <e p="Barrier.cs" t="Include" />
+          <e p="Background" t="Include">
+            <e p="ChangeBackgroundColor.cs" t="Include" />
           </e>
           <e p="Enemy" t="Include">
             <e p="EnemyMove.cs" t="Include" />

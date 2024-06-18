@@ -8,14 +8,14 @@ using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI _scoreText; // UI текст для отображения счета
-    [SerializeField] private GameObject _gameOverPanel; // Панель конца игры
-    [SerializeField] private TextMeshProUGUI _currentScoreText; // Текст текущего счета на панели
-    [SerializeField] private TextMeshProUGUI _highScoreText; // Текст лучшего результата на панели
-    [SerializeField] private ScoreManager _scoreManager;
+    [SerializeField] private TextMeshProUGUI _scoreText; 
+    [SerializeField] private GameObject _gameOverPanel; 
+    [SerializeField] private TextMeshProUGUI _currentScoreText; 
+    [SerializeField] private TextMeshProUGUI _highScoreText; 
+    [SerializeField] private BackgroundColorChanger _backgroundColorChanger; // Новый компонент для изменения цвета
+
     private int _score = 0;
 
-    
     private void Start()
     {
         UpdateScoreText();
@@ -25,6 +25,11 @@ public class ScoreManager : MonoBehaviour
     {
         _score += amount;
         UpdateScoreText();
+        
+        if (_score % 5 == 0 && _score != 0)
+        {
+            _backgroundColorChanger.ChangeBackgroundColor();
+        }
     }
 
     private void UpdateScoreText()
@@ -42,11 +47,8 @@ public class ScoreManager : MonoBehaviour
             PlayerPrefs.SetInt("HighScore", highScore);
         }
 
-        // Обновляем текст на панели
         _currentScoreText.text = _score.ToString();
         _highScoreText.text = highScore.ToString();
-
-        // Показываем панель конца игры
         _gameOverPanel.SetActive(true);
     }
 }

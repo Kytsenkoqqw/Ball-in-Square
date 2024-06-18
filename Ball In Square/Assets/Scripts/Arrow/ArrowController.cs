@@ -56,14 +56,9 @@ public class ArrowController : MonoBehaviour
         Vector3 oppositeDirection = -directionToCollision.normalized * _maxDistance;
         transform.position = _targetObject.position + oppositeDirection;
         transform.up = transform.position - _targetObject.position;
-    
-        // Устанавливаем противоположное направление вращения
-        _rotatingRight = !_rotatingRight;
-    
-        // Устанавливаем противоположный угол вращения
-        _currentRotationAngle = Mathf.Atan2(oppositeDirection.y, oppositeDirection.x) * Mathf.Rad2Deg;
         
-        // Обновляем _angleDifference
+        _rotatingRight = !_rotatingRight;
+        _currentRotationAngle = Mathf.Atan2(oppositeDirection.y, oppositeDirection.x) * Mathf.Rad2Deg;
         _angleDifference -= angle;
     }
 }

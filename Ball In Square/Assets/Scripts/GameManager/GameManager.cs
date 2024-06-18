@@ -21,7 +21,6 @@ public class GameManager : MonoBehaviour
     private void ShowLosePanel()
     {
         _losePanel.SetActive(true);
-     //   Time.timeScale = 0;
     }
 
     public void RestartGame()
