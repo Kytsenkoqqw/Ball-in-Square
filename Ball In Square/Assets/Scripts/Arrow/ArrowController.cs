@@ -54,15 +54,15 @@ public class ArrowController : MonoBehaviour
     public void OnBallCollision(Vector2 collisionPoint, float angle)
     {
         Vector3 directionToCollision = (Vector3)collisionPoint - _targetObject.position;
-        Vector3 newOffset = directionToCollision.normalized * -_maxDistance;
-        transform.position = _targetObject.position + newOffset;
+        Vector3 oppositeDirection = -directionToCollision.normalized * _maxDistance;
+        transform.position = _targetObject.position + oppositeDirection;
         transform.up = transform.position - _targetObject.position;
     
         // Устанавливаем противоположное направление вращения
         _rotatingRight = !_rotatingRight;
     
         // Устанавливаем противоположный угол вращения
-        _currentRotationAngle = Mathf.Atan2(newOffset.y, newOffset.x) * Mathf.Rad2Deg;
+        _currentRotationAngle = Mathf.Atan2(oppositeDirection.y, oppositeDirection.x) * Mathf.Rad2Deg;
         
         // Обновляем _angleDifference
         _angleDifference -= angle;
