@@ -92,6 +92,11 @@
           <e p="BillingMode.json" t="Include" />
         </e>
         <e p="Scripts" t="Include">
+          <e p="Animations" t="Include">
+            <e p="LosePanelAnimation" t="Include">
+              <e p="LosePanelAnimation.cs" t="Include" />
+            </e>
+          </e>
           <e p="Arrow" t="Include">
             <e p="ArrowController.cs" t="Include" />
           </e>

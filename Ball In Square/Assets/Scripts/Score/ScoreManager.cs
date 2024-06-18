@@ -19,7 +19,6 @@ public class ScoreManager : MonoBehaviour
     private void Start()
     {
         UpdateScoreText();
-        _gameOverPanel.SetActive(false); // Скрываем панель конца игры в начале
     }
 
     public void AddScore(int amount)

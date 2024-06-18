@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 
@@ -76,7 +77,6 @@ public class BallController : MonoBehaviour
             OnPlayerDied?.Invoke();
             Destroy(gameObject);
             _scoreManager.GameOver();
-            Time.timeScale = 0;
         }
     }
     

@@ -1515,6 +1515,7 @@ GameObject:
   - component: {fileID: 1824026747}
   - component: {fileID: 1824026749}
   - component: {fileID: 1824026748}
+  - component: {fileID: 1824026750}
   m_Layer: 5
   m_Name: LosePanel
   m_TagString: Untagged
@@ -1543,7 +1544,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -1922.3809}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1824026748
@@ -1584,6 +1585,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1824026746}
   m_CullTransparentMesh: 1
+--- !u!114 &1824026750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1824026746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 981a4cee27fd82f4c8dc1894e414326e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rectTransform: {fileID: 1824026747}
 --- !u!1 &1879860094 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9145912121178331366, guid: 0b4df4c640d91514c8fb2ae1be5eec86, type: 3}
@@ -1634,6 +1648,37 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!1 &1900730801
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1900730802}
+  m_Layer: 0
+  m_Name: PointLosePanel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1900730802
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1900730801}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1942437324 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2780952819553224727, guid: 0b4df4c640d91514c8fb2ae1be5eec86, type: 3}
@@ -2243,3 +2288,4 @@ SceneRoots:
   - {fileID: 858757697}
   - {fileID: 1436625727}
   - {fileID: 1350338296}
+  - {fileID: 1900730802}

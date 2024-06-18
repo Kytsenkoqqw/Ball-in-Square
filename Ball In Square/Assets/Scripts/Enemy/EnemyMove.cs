@@ -16,18 +16,16 @@ public class EnemyMove : MonoBehaviour
     private bool _start = false;
     void Start()
     {
+        BallController.OnPlayerDied += StopMove;
+        
         _corners = new Vector3[4];
         _corners[0] = new Vector3(-_squareSize / 2, -_squareSize / 2, 0);
         _corners[1] = new Vector3(_squareSize / 2, -_squareSize / 2, 0);
         _corners[2] = new Vector3(_squareSize / 2, _squareSize / 2, 0);
         _corners[3] = new Vector3(-_squareSize / 2, _squareSize / 2, 0);
-
-       
         GameObject object1 = Instantiate(_prefab, _corners[0], Quaternion.identity);
         GameObject object2 = Instantiate(_prefab, _corners[2], Quaternion.identity);
-        
 
-    
         _movingObjects.Add(object1);
         _movingObjects.Add(object2);
         _currentTargetIndices.Add(1); 
@@ -47,6 +45,11 @@ public class EnemyMove : MonoBehaviour
             MoveEnemy();
         }
         
+    }
+
+    private void OnDestroy()
+    {
+        BallController.OnPlayerDied -= StopMove;
     }
 
     private void MoveEnemy()
@@ -69,5 +72,10 @@ public class EnemyMove : MonoBehaviour
                 _currentTargetIndices[i] = (currentTargetIndex + 1) % 4;
             }
         }
+    }
+
+    private void StopMove()
+    {
+        _speed = 0;
     }
 }
