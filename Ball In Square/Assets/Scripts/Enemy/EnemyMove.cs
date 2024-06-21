@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class EnemyMove : MonoBehaviour
 {
-    [SerializeField]private GameObject _prefab;
+    [SerializeField] private GameObject _prefab;
     [SerializeField] private float _squareSize = 7f;
     private float _speed = 2f;
 
@@ -13,10 +13,11 @@ public class EnemyMove : MonoBehaviour
     private List<int> _currentTargetIndices = new List<int>();
     private List<GameObject> _movingObjects = new List<GameObject>();
     private bool _start = false;
+
     void Start()
     {
         BallController.OnPlayerDied += StopMove;
-        
+
         _corners = new Vector3[4];
         _corners[0] = new Vector3(-_squareSize / 2, -_squareSize / 2, 0);
         _corners[1] = new Vector3(_squareSize / 2, -_squareSize / 2, 0);
@@ -27,14 +28,13 @@ public class EnemyMove : MonoBehaviour
 
         _movingObjects.Add(object1);
         _movingObjects.Add(object2);
-        _currentTargetIndices.Add(1); 
+        _currentTargetIndices.Add(1);
         _currentTargetIndices.Add(3);
     }
 
-
     void Update()
     {
-        if(Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0))
         {
             _start = true;
         }
@@ -43,7 +43,6 @@ public class EnemyMove : MonoBehaviour
         {
             MoveEnemy();
         }
-        
     }
 
     private void OnDestroy()
@@ -61,16 +60,25 @@ public class EnemyMove : MonoBehaviour
 
             movingObject.transform.position = Vector3.MoveTowards(movingObject.transform.position, targetPosition, _speed * Time.deltaTime);
 
-            
             if (Vector3.Distance(movingObject.transform.position, targetPosition) < 0.01f)
             {
-               
                 movingObject.transform.position = targetPosition;
-
-                
                 _currentTargetIndices[i] = (currentTargetIndex + 1) % 4;
             }
         }
+    }
+
+    public void SpawnNewEnemy()
+    {
+        int spawnIndex = _movingObjects.Count % 4;
+        GameObject newEnemy = Instantiate(_prefab, _corners[spawnIndex], Quaternion.identity);
+        _movingObjects.Add(newEnemy);
+        _currentTargetIndices.Add((spawnIndex + 1) % 4);
+    }
+
+    public List<GameObject> GetEnemies()
+    {
+        return _movingObjects;
     }
 
     private void StopMove()

@@ -12,7 +12,8 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private GameObject _gameOverPanel; 
     [SerializeField] private TextMeshProUGUI _currentScoreText; 
     [SerializeField] private TextMeshProUGUI _highScoreText; 
-    [SerializeField] private BackgroundColorChanger _backgroundColorChanger; // Новый компонент для изменения цвета
+    [SerializeField] private BackgroundColorChanger _backgroundColorChanger; 
+    [SerializeField] private DifficultyManager _difficultyManager;
 
     private int _score = 0;
 
@@ -25,6 +26,8 @@ public class ScoreManager : MonoBehaviour
     {
         _score += amount;
         UpdateScoreText();
+        
+        _difficultyManager.CheckDifficulty(_score);
         
         if (_score % 5 == 0 && _score != 0)
         {
