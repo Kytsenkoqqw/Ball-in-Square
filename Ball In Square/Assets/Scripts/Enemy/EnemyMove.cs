@@ -6,9 +6,8 @@ using UnityEngine;
 public class EnemyMove : MonoBehaviour
 {
     [SerializeField]private GameObject _prefab;
-
-    private float _speed = 2f;
     [SerializeField] private float _squareSize = 7f;
+    private float _speed = 2f;
 
     private Vector3[] _corners;
     private List<int> _currentTargetIndices = new List<int>();

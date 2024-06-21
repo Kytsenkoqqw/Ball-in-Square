@@ -25,14 +25,14 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/SceneManager/MenuManager.cs" />
         <option value="$PROJECT_DIR$/Assets/LeanTween/Testing/TestingSceneSwitching.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Player/BallController.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyMove.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Animations/LosePanelAnimation/LosePanelAnimation.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Arrow/ArrowController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Target/Target.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/GameManager/GameManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Background/ChangeBackgroundColor.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Score/ScoreManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Player/BallMark.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyMove.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Arrow/ArrowController.cs" />
       </list>
     </option>
   </component>
@@ -80,7 +80,11 @@
       <workItem from="1718623884833" duration="16386000" />
       <workItem from="1718715198287" duration="7973000" />
       <workItem from="1718734468838" duration="2202000" />
-      <workItem from="1718737398303" duration="663000" />
+      <workItem from="1718737398303" duration="929000" />
+      <workItem from="1718800185222" duration="4470000" />
+      <workItem from="1718806660781" duration="381000" />
+      <workItem from="1718832359098" duration="380000" />
+      <workItem from="1718971887223" duration="274000" />
     </task>
     <servers />
   </component>
